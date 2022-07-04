@@ -1,9 +1,21 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
+
+
+class Developer(models.Model):
+    developer_id = models.AutoField(primary_key=True)
+    developer_name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone_number = models.CharField(max_length=12, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
+
+
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
+    developer_id = models.ForeignKey(Developer, on_delete=models.CASCADE, null=True, blank=True)
     project_name = models.CharField(max_length=500)
     description = models.TextField(null=True, blank=True)
     address = models.TextField(null=True, blank=True)
